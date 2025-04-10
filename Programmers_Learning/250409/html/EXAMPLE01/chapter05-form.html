@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>폼 태그 실습</title>
+</head>
+<body>
+    <form action="chapter05-form-result.html" method="get">
+        <label for="id">아이디</label><input type="text" name="id" id="id" value="1234">
+        <input type="password" name="pw" placeholder="비번">
+        in
+
+        <select name="opt">
+            <option value="1">선택1</option>
+            <option value="2" selected>선택2</option>
+            <option value="3">선택3</option>
+        </select>
+        <!-- <input type="submit" value="전송"> -->
+        <button type="submit">전송!</button>
+        <label for="agree">동의</label>
+        <input type="checkbox" name="agree" id="agree">
+        <input type="radio" name="number" value="1">1
+        <input type="radio" name="number" value="2">2
+        <input type="radio" name="number" value="3">3
+        <input type="radio" name="number" value="4">4
+
+        <input type="file" name="file" id="file">
+        <br>
+        <textarea name="arr" id="arr"></textarea>
+    </form>
+</body>
+</html>
