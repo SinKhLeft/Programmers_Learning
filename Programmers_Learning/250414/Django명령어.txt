@@ -1,0 +1,4 @@
+cd D:\workspace\programmers\python
+py -m venv django-project
+django-project\Scripts\activate.bat
+deactivate
