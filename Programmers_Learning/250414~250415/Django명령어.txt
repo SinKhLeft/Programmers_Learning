@@ -1,0 +1,16 @@
+가상환경 생성 : #py -m venv (가상환경 프로젝트 명)
+생성된 가상환경 진입 명령어 : #(가상환경 프로젝트 명)\Scripts\activate.bat
+가상환경 나가기 : deactivate
+Django 서버on : python manage.py runserver
+Django model migration 생성 : python manage.py makemigrations
+Django model 마지막 migration  정보 DB 적용 : python manage.py migrate
+Django 지정한 순번의 migration으로 롤백 : python manage.py migrate (app_Name) (순번)
+Django 관리자 계정 생성 : python manage.py createsuperuser
+Django shell 진입 : python manage.py shell 
+
+
+
+개인 기록 명령어
+cd D:\workspace\programmers\python
+py -m venv django-project 
+django-project\Scripts\activate.bat
