@@ -8,9 +8,12 @@ Django 지정한 순번의 migration으로 롤백 : python manage.py migrate (ap
 Django 관리자 계정 생성 : python manage.py createsuperuser
 Django shell 진입 : python manage.py shell 
 
-
+가이드Url: https://docs.djangoproject.com/en/5.2/
 
 개인 기록 명령어
 cd D:\workspace\programmers\python
 py -m venv django-project 
 django-project\Scripts\activate.bat
+
+
+
