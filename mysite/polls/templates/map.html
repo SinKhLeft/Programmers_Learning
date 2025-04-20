@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대한민국 지도</title>
+    <style>
+        svg {
+            width: 100%;
+            height: auto;
+        }
+        .highlight {
+            fill: orange !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>대한민국 지도</h1>
+    <div id="map-container">
+        <!-- SVG 지도 포함 -->
+        {% include 'Administrative_divisions_map_of_South_Korea.svg' %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const regions = document.querySelectorAll('svg [id]');
+
+            regions.forEach(region => {
+                region.addEventListener('click', () => {
+                    // 모든 지역의 강조 효과 제거
+                    regions.forEach(r => r.classList.remove('highlight'));
+
+                    // 클릭된 지역 강조
+                    region.classList.add('highlight');
+
+                    // 클릭 횟수에 따라 동작 변경
+                    const clickCount = region.dataset.clickCount ? parseInt(region.dataset.clickCount) : 0;
+                    region.dataset.clickCount = clickCount + 1;
+
+                    const svg = region.closest('svg');
+
+                    if (clickCount % 2 === 0) {
+                        // 시/도 확대
+                        const bbox = region.getBBox();
+                        svg.setAttribute('viewBox', `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+
+                        // 시/군 경계선 제거
+                        regions.forEach(r => r.style.stroke = '');
+                        region.style.stroke = 'black';
+                        region.style.strokeWidth = '2';
+
+                        // 모든 지역 표시
+                        regions.forEach(r => r.style.display = 'block');
+                    } else {
+                        // 시/군 확대
+                        const bbox = region.getBBox();
+                        svg.setAttribute('viewBox', `${bbox.x - 10} ${bbox.y - 10} ${bbox.width + 20} ${bbox.height + 20}`);
+
+                        // 시/군 경계선 추가
+                        regions.forEach(r => r.style.stroke = 'black');
+                        regions.forEach(r => r.style.strokeWidth = '1');
+
+                        // 선택된 지역 외 숨김 처리
+                        regions.forEach(r => {
+                            if (r !== region) {
+                                r.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
