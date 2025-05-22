@@ -1,6 +1,7 @@
 가상환경 생성 : #py -m venv (가상환경 프로젝트 명)
 생성된 가상환경 진입 명령어 : #(가상환경 프로젝트 명)\Scripts\activate.bat
 가상환경 나가기 : deactivate
+Django 서버 create django-admin startproject (ProjectFolder) (projectName)
 Django 서버on : python manage.py runserver
 Django model migration 생성 : python manage.py makemigrations
 Django model 마지막 migration  정보 DB 적용 : python manage.py migrate
