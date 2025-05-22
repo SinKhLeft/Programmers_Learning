@@ -30,7 +30,7 @@ def transform(text):
     records = []
     jsonArray = json.loads(text)
     for row in jsonArray:
-        records.append([row['name']['official'],row['area'],row['population']])
+        records.append([row['name']['official'].replace(""), row['area'], row['population']])
     logging.info("Transform ended")
     return records
 
@@ -47,7 +47,7 @@ def initTable(dropYn=False):
     cur.execute("""
         CREATE TABLE IF NOT EXISTS azx4908.countryNames (
                 official_name VARCHAR(100),
-                area INT,
+                area float,
                 population INT)
     """)              
 
@@ -59,15 +59,17 @@ def load(schema, records):
         cur.execute("BEGIN;")
         cur.execute(f"DELETE FROM {schema}.countryNames;") 
         for r in records:
-            name = r[0]
+            name = r[0].replace("'", "''")  # SQL Injection 방지
             area = r[1]
             population = r[2]
             sql = f"INSERT INTO {schema}.countryNames VALUES ('{name}', '{area}','{population}');"
+            logging.info(sql)
             cur.execute(sql)
         cur.execute("COMMIT;")   # cur.execute("END;") 
     except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
+        logging.error(error)
         cur.execute("ROLLBACK;")   
+        raise error
     logging.info("load done")
 
 
@@ -86,5 +88,5 @@ with DAG(
     schema = 'azx4908'
 
     lines = transform(extract(url))
-    initTable()
+    initTable(True)
     load(schema, lines)
